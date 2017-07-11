@@ -96,14 +96,9 @@ class ds1074z_oscilloscope:
         return ou
     def getInfo(self):
         ou = dict()
-        ou["DEVICE"] = dict()
         ou["DISPLAY"] = dict()
         ou["TRIGGER"] = dict()
         #now put some information in
-        ou["DEVICE"]["TYPE"] = "OSCILLOSCOPE"
-        ou["DEVICE"]["MANUFACTURER"] = "RIGOL"
-        ou["DEVICE"]["MODEL"] = "DS1074Z"
-        ou["DEVICE"]["CHANNELCOUNT"] = "4"
         ou["DISPLAY"]["TIMEDIVISION"] = self.query(":WAV:XINC?")
         ou["DISPLAY"]["VOLTAGEDIVISION"] = self.query(":WAV:YINC?")
         ou["TRIGGER"]["MODE"] = self.query(":TRIG:MODE?")
