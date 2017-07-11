@@ -79,7 +79,8 @@ class ds1074z_oscilloscope:
         #responce is a \n terminated bytes object
         ou = ""
         for x in responce:
-            ou = ou+chr(x)
+            if x!="\n":
+                ou = ou+chr(x)
         return ou
     def getRawEvent(self,channels):
         self.stop()
