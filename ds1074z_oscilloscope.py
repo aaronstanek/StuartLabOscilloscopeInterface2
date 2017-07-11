@@ -104,19 +104,19 @@ class ds1074z_oscilloscope:
     def getInfo(self):
         ou = dict()
         #now put some information in
-        ou["DISPLAY_TIMEDIVISION"] = self.query(":WAV:XINC?")
-        ou["DISPLAY_VOLTAGEDIVISION"] = self.query(":WAV:YINC?")
-        ou["TRIGGER_MODE"] = self.query(":TRIG:MODE?")
+        ou["DISPLAY_TIMEDIVISION"] = self.query_decode(":WAV:XINC?")
+        ou["DISPLAY_VOLTAGEDIVISION"] = self.query_decode(":WAV:YINC?")
+        ou["TRIGGER_MODE"] = self.query_decode(":TRIG:MODE?")
         if ou["TRIGGER_MODE"]=="EDGE":
-            ou["TRIGGER_CHANNEL"] = self.query(":TRIG:EDG:SOUR?")
-            ou["TRIGGER_SLOPE"] = self.query(":TRIG:EDG:SLOP?")
-            ou["TRIGGER_LEVEL"] = self.query(":TRIG:EDG:LEV?")
+            ou["TRIGGER_CHANNEL"] = self.query_decode(":TRIG:EDG:SOUR?")
+            ou["TRIGGER_SLOPE"] = self.query_decode(":TRIG:EDG:SLOP?")
+            ou["TRIGGER_LEVEL"] = self.query_decode(":TRIG:EDG:LEV?")
         elif ou["TRIGGER_MODE"]=="DEL":
-            ou["TRIGGER_SOURCEA"] = self.query(":TRIG:DEL:SA?")
-            ou["TRIGGER_SLOPEA"] = self.query(":TRIG:DEL:SLOPA?")
-            ou["TRIGGER_SOURCEB"] = self.query(":TRIG:DEL:SB?")
-            ou["TRIGGER_SLOPEB"] = self.query(":TRIG:DEL:SLOPB?")
-            ou["TRIGGER_DELAYTYPE"] = self.query(":TRIG:DEL:TYP?")
-            ou["TRIGGER_MAXDELAY"] = self.query(":TRIG:DEL:TUPP?")
-            ou["TRIGGER_MINDELAY"] = self.query(":TRIG:DEL:TLOW?")
+            ou["TRIGGER_SOURCEA"] = self.query_decode(":TRIG:DEL:SA?")
+            ou["TRIGGER_SLOPEA"] = self.query_decode(":TRIG:DEL:SLOPA?")
+            ou["TRIGGER_SOURCEB"] = self.query_decode(":TRIG:DEL:SB?")
+            ou["TRIGGER_SLOPEB"] = self.query_decode(":TRIG:DEL:SLOPB?")
+            ou["TRIGGER_DELAYTYPE"] = self.query_decode(":TRIG:DEL:TYP?")
+            ou["TRIGGER_MAXDELAY"] = self.query_decode(":TRIG:DEL:TUPP?")
+            ou["TRIGGER_MINDELAY"] = self.query_decode(":TRIG:DEL:TLOW?")
         return ou
