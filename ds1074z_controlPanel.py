@@ -37,6 +37,10 @@ class ds1074z_controlPanel:
         print("Decoding events.")
         clean = decodeEvents.decodeEvents(filtered)
         del(filtered)
+        print("Getting metadata.")
+        meta = self.osc.getInfo()
+        for x in meta:
+            clean.meta[x] = meta[x]
         print("Saving events.")
         self.saveDataset(clean,passData)
     def collector(self,channels,count,delay,path,fmt):
