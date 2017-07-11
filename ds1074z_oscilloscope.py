@@ -96,22 +96,20 @@ class ds1074z_oscilloscope:
         return ou
     def getInfo(self):
         ou = dict()
-        ou["DISPLAY"] = dict()
-        ou["TRIGGER"] = dict()
         #now put some information in
-        ou["DISPLAY"]["TIMEDIVISION"] = self.query(":WAV:XINC?")
-        ou["DISPLAY"]["VOLTAGEDIVISION"] = self.query(":WAV:YINC?")
-        ou["TRIGGER"]["MODE"] = self.query(":TRIG:MODE?")
-        if ou["TRIGGER"]["MODE"]=="EDGE":
-            ou["TRIGGER"]["CHANNEL"] = self.query(":TRIG:EDG:SOUR?")
-            ou["TRIGGER"]["SLOPE"] = self.query(":TRIG:EDG:SLOP?")
-            ou["TRIGGER"]["LEVEL"] = self.query(":TRIG:EDG:LEV?")
-        elif ou["TRIGGER"]["MODE"]=="DEL":
-            ou["TRIGGER"]["SOURCEA"] = self.query(":TRIG:DEL:SA?")
-            ou["TRIGGER"]["SLOPEA"] = self.query(":TRIG:DEL:SLOPA?")
-            ou["TRIGGER"]["SOURCEB"] = self.query(":TRIG:DEL:SB?")
-            ou["TRIGGER"]["SLOPEB"] = self.query(":TRIG:DEL:SLOPB?")
-            ou["TRIGGER"]["DELAYTYPE"] = self.query(":TRIG:DEL:TYP?")
-            ou["TRIGGER"]["MAXDELAY"] = self.query(":TRIG:DEL:TUPP?")
-            ou["TRIGGER"]["MINDELAY"] = self.query(":TRIG:DEL:TLOW?")
+        ou["DISPLAY_TIMEDIVISION"] = self.query(":WAV:XINC?")
+        ou["DISPLAY_VOLTAGEDIVISION"] = self.query(":WAV:YINC?")
+        ou["TRIGGER_MODE"] = self.query(":TRIG:MODE?")
+        if ou["TRIGGER_MODE"]=="EDGE":
+            ou["TRIGGER_CHANNEL"] = self.query(":TRIG:EDG:SOUR?")
+            ou["TRIGGER_SLOPE"] = self.query(":TRIG:EDG:SLOP?")
+            ou["TRIGGER_LEVEL"] = self.query(":TRIG:EDG:LEV?")
+        elif ou["TRIGGER_MODE"]=="DEL":
+            ou["TRIGGER_SOURCEA"] = self.query(":TRIG:DEL:SA?")
+            ou["TRIGGER_SLOPEA"] = self.query(":TRIG:DEL:SLOPA?")
+            ou["TRIGGER_SOURCEB"] = self.query(":TRIG:DEL:SB?")
+            ou["TRIGGER_SLOPEB"] = self.query(":TRIG:DEL:SLOPB?")
+            ou["TRIGGER_DELAYTYPE"] = self.query(":TRIG:DEL:TYP?")
+            ou["TRIGGER_MAXDELAY"] = self.query(":TRIG:DEL:TUPP?")
+            ou["TRIGGER_MINDELAY"] = self.query(":TRIG:DEL:TLOW?")
         return ou
