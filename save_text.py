@@ -39,5 +39,7 @@ def save_basic(ds,passData):
                     merge(ouData,str(x.data[i][line]))
                 addReturn(ouData)
             dumpBinToFile(passData["path"]+"event_"+str(passData["eventCount"])+".ord.txt",ouData)
+            passData["eventCount"] = passData["eventCount"]+1
+            passData["fileCount"] = passData["fileCount"]+1
         except:
             print("Error while writing to file. Event skipped.")
