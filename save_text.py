@@ -36,7 +36,7 @@ def save_basic(ds,passData):
                 for i in range(len(chan)):
                     if i!=0:
                         addSpace(ouData)
-                    merge(ouData,str(x.data[i][line]))
+                    merge(ouData,str(x.data[chan[i]][line]))
                 addReturn(ouData)
             dumpBinToFile(passData["path"]+"event_"+str(passData["eventCount"])+".ord.txt",ouData)
             passData["eventCount"] = passData["eventCount"]+1
