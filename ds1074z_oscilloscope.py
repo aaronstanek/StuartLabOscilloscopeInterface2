@@ -106,6 +106,7 @@ class ds1074z_oscilloscope:
         #now put some information in
         ou["DISPLAY_TIMEDIVISION"] = self.query_decode(":WAV:XINC?")
         ou["DISPLAY_VOLTAGEDIVISION"] = self.query_decode(":WAV:YINC?")
+        ou["TRIGGER_POINT"] = self.query_decode(":TRIG:POS?")
         ou["TRIGGER_MODE"] = self.query_decode(":TRIG:MODE?")
         if ou["TRIGGER_MODE"]=="EDGE":
             ou["TRIGGER_CHANNEL"] = self.query_decode(":TRIG:EDG:SOUR?")
