@@ -24,6 +24,8 @@ class ds1074z_controlPanel:
             save_json.save_meta(ds,passData)
         elif passData["fmt"]=="json_clump":
             save_json.save_clump(ds,passData)
+        elif passData["fmt"]=="text_basic":
+            save_text.save_basic(ds,passData)
         else:
             raise Exception("The save format ("+str(passData["fmt"])+") is not recognized.")
     def singleCollection(self,passData):
