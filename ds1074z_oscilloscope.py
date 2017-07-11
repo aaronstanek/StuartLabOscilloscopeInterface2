@@ -74,6 +74,13 @@ class ds1074z_oscilloscope:
         self.sendCommand(query)
         responce = self.res.read_raw()
         return responce
+    def query_decode(self,query):
+        responce = self.query(query)
+        #responce is a \n terminated bytes object
+        ou = ""
+        for x in responce:
+            ou = ou+chr(x)
+        return ou
     def getRawEvent(self,channels):
         self.stop()
         ou = rawEvent()
