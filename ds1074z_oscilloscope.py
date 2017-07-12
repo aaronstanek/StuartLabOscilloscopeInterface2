@@ -49,6 +49,8 @@ class ds1074z_oscilloscope:
                 pass
             try:
                 self.res.query("*IDN?")
+                self.run()
+                self.query_decode(":WAV:XINC?")
                 good = True
             except:
                 attempt = attempt+1
