@@ -35,6 +35,7 @@ class ds1074z_oscilloscope:
         except:
             pass
     def reconnect(self):
+        time.sleep(2) #sleep for 2 seconds
         good = False
         attempt = 0
         while good==False:
@@ -51,8 +52,9 @@ class ds1074z_oscilloscope:
                 good = True
             except:
                 attempt = attempt+1
-                if attempt>=10:
+                if attempt>=60:
                     raise Exception("Failed to reconnect.")
+                time.sleep(10) #sleep for 10 seconds before trying again
     #now basic controls
     def sendCommand(self,command):
         self.res.write(command)
