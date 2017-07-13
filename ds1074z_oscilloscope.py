@@ -126,3 +126,34 @@ class ds1074z_oscilloscope:
             ou["TRIGGER_MAXDELAY"] = self.query_decode(":TRIG:DEL:TUPP?")
             ou["TRIGGER_MINDELAY"] = self.query_decode(":TRIG:DEL:TLOW?")
         return ou
+    #now advanced controls
+    def setTimeDivision(self,value):
+        self.sendCommand(":WAV:XINC "+str(value))
+    def setVoltageDivision(self,value):
+        self.sendCommand(":WAV:YINC "=str(value))
+    def setTriggerMode(self,value):
+        self.sendCommand(":TRIG:MODE "+str(value))
+    def setEdgeTrigger(self,values):
+        self.setTriggerMode("EDGE")
+        if "TRIGGER_CHANNEL" in values:
+            self.sendCommand(":TRIG:EDG:SOUR "+str(values["TRIGGER_CHANNEL"]))
+        if "TRIGGER_SLOPE" in values:
+            self.sendCommand(":TRIG:EDG:SLOP "+str(values["TRIGGER_SLOPE"]))
+        if "TRIGGER_LEVEL" in values:
+            self.sendCommand(":TRIG:EDG:LEV "+str(values["TRIGGER_LEVEL"]))
+    def setDelayTrigger(self,values):
+        self.setTriggerMode("DEL")
+        if "TRIGGER_SOURCEA" in values:
+            self.sendCommand(":TRIG:DEL:SA "+str(values["TRIGGER_SOURCEA"]))
+        if "TRIGGER_SLOPEA" in values:
+            self.sendCommand(":TRIG:DEL:SLOPA "+str(values["TRIGGER_SLOPEA"]))
+        if "TRIGGER_SOURCEB" in values:
+            self.sendCommand(":TRIG:DEL:SB "+str(values["TRIGGER_SOURCEB"]))
+        if "TRIGGER_SLOPEB" in values:
+            self.sendCommand(":TRIG:DEL:SLOPB "+str(values["TRIGGER_SLOPEB"]))
+        if "TRIGGER_DELAYTYPE" in values:
+            self.sendCommand(":TRIG:DEL:TYP "+str(values["TRIGGER_DELAYTYPE"]))
+        if "TRIGGER_MAXDELAY" in values:
+            self.sendCommand(":TRIG:DEL:TUPP "+str(values["TRIGGER_MAXDELAY"]))
+        if "TRIGGER_MINDELAY" in values:
+            self.sendCommand(":TRIG:DEL:TLOW "+str(values["TRIGGER_MINDELAY"]))
