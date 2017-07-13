@@ -1,3 +1,5 @@
+import ds1074z_controlPanel
+
 class variableBlock:
     def __init__(self):
         self.vars = dict()
@@ -31,6 +33,7 @@ class command:
 
 class commandScript:
     def __init__(self):
+        self.cp = ds1074z_controlPanel.ds1074z_controlPanel()
         self.com = []
         self.vb = variableBlock()
         self.mode = "setup"
