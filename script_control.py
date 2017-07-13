@@ -18,6 +18,12 @@ class variableBlock:
             return True
         return False
 
+def commandChecker(com):
+    #checks a command
+    #returns True if the command is valid
+    #returns False if the command is not valid
+    return True #work on this
+
 class command:
     def __init__(self,base,param):
         self.base = str(base)
@@ -37,3 +43,12 @@ class commandScript:
     def readyForExecution(self):
         self.mode = "execution"
         self.pos = 0
+    def step(self):
+        #increments pos
+        #returns True if not done
+        #return False if there are no more commands to execute
+        self.pos = self.pos+1
+        if self.pos>=self.commandCount:
+            self.mode = "done"
+            return False
+        return True
