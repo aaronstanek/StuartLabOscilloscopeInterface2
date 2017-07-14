@@ -28,6 +28,7 @@ def commandChecker(com):
 
 def execute(com):
     #executes a command
+    pass
 
 class command:
     def __init__(self,base,param):
@@ -58,3 +59,36 @@ class commandScript:
             self.mode = "done"
             return False
         return True
+
+def readFileRaw(filename):
+    infile = open(filename,"rb")
+    indata = infile.read()
+    infile.close()
+    return indata
+
+def polysplit(bdata,splitc):
+    #bdata is a bytearray
+    #splitc is a list of byte arrays to split along
+    last = 0
+    ou = []
+    for i in range(len(bdata)):
+        found = False
+        for x in splitc:
+            if x==bdata[i:i+len(x)]:
+                found = True
+                break
+        if found:
+            ou.append(bdata[last,i])
+            last = i
+    ou.append(last,len(bdata))
+    return ou
+
+def parseFile(bdata):
+    lines = bdata.split('\r\n')
+    for i in range(len(lines)):
+        lines[i]=lines[i].split(' ')
+
+def readParse(filename):
+    #returns a commandScript object
+    ou = commandScript()
+    
