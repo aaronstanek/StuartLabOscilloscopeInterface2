@@ -1,3 +1,9 @@
+def setVariable(p,vb):
+    g = p.split("=")
+    if len(g)!=2:
+        raise Exception("set command coud not be parsed: "+"set "+p)
+    vb.setValue(g[0],g[1])
+
 def execute(cp,com,vb,extra):
     #cp is a controlPanel object
     #com is command object
@@ -7,7 +13,9 @@ def execute(cp,com,vb,extra):
     #osc is an oscilloscope object
     b = com.base
     p = com.param
-    if b=="send":
+    if b=="set":
+        setVariable(p,vb)
+    elif b=="send":
         osc.sendCommand(p)
     elif b=="find":
         osc.find_device()

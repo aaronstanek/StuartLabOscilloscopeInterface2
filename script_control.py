@@ -56,6 +56,10 @@ class commandScript:
             self.mode = "done"
             return False
         return True
+    def execute(self):
+        for c in self.com:
+            #c is a command
+            script_control_backend.execute(self.cp,c,self.vb,dict())
 
 def readFileRaw(filename):
     infile = open(filename,"rb")
