@@ -35,7 +35,6 @@ class command:
 class commandScript:
     def __init__(self):
         self.cp = ds1074z_controlPanel.ds1074z_controlPanel()
-        self.osc = cp.osc #just to make it easier
         self.com = []
         self.vb = variableBlock()
         self.mode = "setup"
