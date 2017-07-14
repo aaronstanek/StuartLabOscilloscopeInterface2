@@ -59,7 +59,56 @@ class commandScript:
     def execute(self):
         for c in self.com:
             #c is a command
-            script_control_backend.execute(self.cp,c,self.vb,dict())
+            if c.base=="trigger-edge":
+                extra = dict()
+                try:
+                    extra["TRIGGER_CHANNEL"] = self.vb.getValue("tr-channel")
+                except:
+                    pass
+                try:
+                    extra["TRIGGER_SLOPE"] = self.vb.getValue("tr-slope")
+                except:
+                    pass
+                try:
+                    extra["TRIGGER_LEVEL"] = self.vb.getValue("tr-level")
+                except:
+                    pass
+                script_control_backend.execute(self.cp,c,self.vb,extra)
+            elif c.base=="trigger-delay":
+                extra = dict()
+                try:
+                    extra["TRIGGER_SOURCEA"] = self.vb.getValue("tr-source-a")
+                except:
+                    pass
+                try:
+                    extra["TRIGGER_SOURCEB"] = self.vb.getValue("tr-source-b")
+                except:
+                    pass
+                try:
+                    extra["TRIGGER_SLOPEA"] = self.vb.getValue("tr-slope-a")
+                except:
+                    pass
+                try:
+                    extra["TRIGGER_SLOPEB"] = self.vb.getValue("tr-slope-b")
+                except:
+                    pass
+                try:
+                    extra["TRIGGER_DELAYTIME"] = self.vb.getValue("tr-delay-time")
+                except:
+                    pass
+                try:
+                    extra["TRIGGER_MAXDELAY"] = self.vb.getValue("tr-delay-max")
+                except:
+                    pass
+                try:
+                    extra["TRIGGER_MINDELAY"] = self.vb.getValue("tr-delay-min")
+                except:
+                    pass
+                script_control_backend.execute(self.cp,c,self.vb,extra)
+            elif c.base=="collect-data":
+                pass
+            else:
+                script_control_backend.execute(self.cp,c,self.vb,dict())
 
 def readFileRaw(filename):
     infile = open(filename,"rb")
