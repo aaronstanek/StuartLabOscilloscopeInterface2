@@ -109,7 +109,18 @@ class commandScript:
                     pass
                 script_control_backend.execute(self.cp,c,self.vb,extra)
             elif c.base=="collect-data":
-                pass
+                channels = self.vb.getValue("co-channels")
+                channels = channels.split(",")
+                for i in range(len(channels)):
+                    channels[i] = int(channels[i])
+                #channels is set
+                extra = dict()
+                extra["channels"] = channels
+                extra["count"] = int(self.vb.getValue("co-count"))
+                extra["delay"] = float(self.vb.getValue("co-delay"))
+                extra["path"] = self.vb.getValue("co-path")
+                extra["fmt"] = self.vb.getValue("co-format")
+                script_control_backend.execute(self.cp,c,self.vb,extra)
             else:
                 script_control_backend.execute(self.cp,c,self.vb,dict())
 
