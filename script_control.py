@@ -26,10 +26,6 @@ def commandChecker(com):
     #returns False if the command is not valid
     return True #work on this
 
-def execute(com):
-    #executes a command
-    pass
-
 class command:
     def __init__(self,base,param):
         self.base = str(base)
@@ -38,6 +34,7 @@ class command:
 class commandScript:
     def __init__(self):
         self.cp = ds1074z_controlPanel.ds1074z_controlPanel()
+        self.osc = cp.osc #just to make it easier
         self.com = []
         self.vb = variableBlock()
         self.mode = "setup"
