@@ -28,6 +28,8 @@ class ds1074z_controlPanel:
             save_text.save_basic(ds,passData)
         elif passData["fmt"]=="text_stuart1":
             save_text.save_stuart1(ds,passData)
+        elif passData["fmt"]=="text_stuart2":
+            save_text.save_stuart2(ds,passData)
         else:
             raise Exception("The save format ("+str(passData["fmt"])+") is not recognized.")
     def singleCollection(self,passData):
