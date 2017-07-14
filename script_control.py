@@ -11,6 +11,9 @@ class variableBlock:
         if sn in self.vars:
             return self.vars[sn]
         return ""
+    def getValueC(self,name):
+        v = self.getValue(name)
+        return v.upper()
     def removeValue(self,name):
         sn = str(name)
         if sn in self.vars:
@@ -62,46 +65,46 @@ class commandScript:
             if c.base=="trigger-edge":
                 extra = dict()
                 try:
-                    extra["TRIGGER_CHANNEL"] = self.vb.getValue("tr-channel")
+                    extra["TRIGGER_CHANNEL"] = self.vb.getValueC("tr-channel")
                 except:
                     pass
                 try:
-                    extra["TRIGGER_SLOPE"] = self.vb.getValue("tr-slope")
+                    extra["TRIGGER_SLOPE"] = self.vb.getValueC("tr-slope")
                 except:
                     pass
                 try:
-                    extra["TRIGGER_LEVEL"] = self.vb.getValue("tr-level")
+                    extra["TRIGGER_LEVEL"] = self.vb.getValueC("tr-level")
                 except:
                     pass
                 script_control_backend.execute(self.cp,c,self.vb,extra)
             elif c.base=="trigger-delay":
                 extra = dict()
                 try:
-                    extra["TRIGGER_SOURCEA"] = self.vb.getValue("tr-source-a")
+                    extra["TRIGGER_SOURCEA"] = self.vb.getValueC("tr-source-a")
                 except:
                     pass
                 try:
-                    extra["TRIGGER_SOURCEB"] = self.vb.getValue("tr-source-b")
+                    extra["TRIGGER_SOURCEB"] = self.vb.getValueC("tr-source-b")
                 except:
                     pass
                 try:
-                    extra["TRIGGER_SLOPEA"] = self.vb.getValue("tr-slope-a")
+                    extra["TRIGGER_SLOPEA"] = self.vb.getValueC("tr-slope-a")
                 except:
                     pass
                 try:
-                    extra["TRIGGER_SLOPEB"] = self.vb.getValue("tr-slope-b")
+                    extra["TRIGGER_SLOPEB"] = self.vb.getValueC("tr-slope-b")
                 except:
                     pass
                 try:
-                    extra["TRIGGER_DELAYTIME"] = self.vb.getValue("tr-delay-time")
+                    extra["TRIGGER_DELAYTIME"] = self.vb.getValueC("tr-delay-time")
                 except:
                     pass
                 try:
-                    extra["TRIGGER_MAXDELAY"] = self.vb.getValue("tr-delay-max")
+                    extra["TRIGGER_MAXDELAY"] = self.vb.getValueC("tr-delay-max")
                 except:
                     pass
                 try:
-                    extra["TRIGGER_MINDELAY"] = self.vb.getValue("tr-delay-min")
+                    extra["TRIGGER_MINDELAY"] = self.vb.getValueC("tr-delay-min")
                 except:
                     pass
                 script_control_backend.execute(self.cp,c,self.vb,extra)

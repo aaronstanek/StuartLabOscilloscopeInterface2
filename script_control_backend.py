@@ -38,7 +38,7 @@ def execute(cp,com,vb,extra):
     elif b=="voltage-division":
         osc.setVoltageDivision(p)
     elif b=="trigger-mode":
-        osc.setTriggerMode(p)
+        osc.setTriggerMode(p.upper())
     elif b=="trigger-edge":
         osc.setEdgeTrigger(extra)
     elif b=="trigger-delay":
