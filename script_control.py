@@ -92,7 +92,7 @@ def parseFile(bdata):
     lines = no_empty_lines
     del(no_empty_lines)
     for lin in range(len(lines)):
-        x = lines[lin]
+        x = (lines[lin]).decode("utf-8")
         c = ""
         p = ""
         mode = "c"
