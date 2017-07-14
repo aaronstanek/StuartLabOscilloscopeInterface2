@@ -26,6 +26,9 @@ def commandChecker(com):
     #returns False if the command is not valid
     return True #work on this
 
+def execute(com):
+    #executes a command
+
 class command:
     def __init__(self,base,param):
         self.base = str(base)
