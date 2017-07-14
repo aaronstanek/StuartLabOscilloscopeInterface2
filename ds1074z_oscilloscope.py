@@ -130,7 +130,7 @@ class ds1074z_oscilloscope:
     def setTimeDivision(self,value):
         self.sendCommand(":WAV:XINC "+str(value))
     def setVoltageDivision(self,value):
-        self.sendCommand(":WAV:YINC "=str(value))
+        self.sendCommand(":WAV:YINC "+str(value))
     def setTriggerMode(self,value):
         self.sendCommand(":TRIG:MODE "+str(value))
     def setEdgeTrigger(self,values):
