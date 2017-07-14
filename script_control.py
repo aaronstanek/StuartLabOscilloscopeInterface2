@@ -70,25 +70,56 @@ def polysplit(bdata,splitc):
     #bdata is a bytearray
     #splitc is a list of byte arrays to split along
     last = 0
+    foundLen = 0
     ou = []
     for i in range(len(bdata)):
         found = False
         for x in splitc:
             if x==bdata[i:i+len(x)]:
                 found = True
+                foundLen = len(x)
                 break
         if found:
-            ou.append(bdata[last,i])
-            last = i
-    ou.append(last,len(bdata))
+            ou.append(bdata[last:i])
+            last = i+foundLen
+    ou.append(bdata[last:len(bdata)])
     return ou
 
 def parseFile(bdata):
-    lines = bdata.split('\r\n')
-    for i in range(len(lines)):
-        lines[i]=lines[i].split(' ')
+    lines = polysplit(bdata,[b'\r',b'\n'])
+    no_empty_lines = []
+    for x in lines:
+        if len(x)!=0:
+            no_empty_lines.append(x)
+    lines = no_empty_lines
+    del(no_empty_lines)
+    for lin in range(len(lines)):
+        x = lines[lin]
+        c = ""
+        p = ""
+        mode = "c"
+        for i in range(len(x)):
+            if mode==c:
+                if x==" ":
+                    c = x[:i]
+                    mode = "s"
+            elif mode=="s":
+                if x!=" ":
+                    p = x[i:]
+                    mode = "d"
+        if mode=="c":
+            lines[lin] = [c,""]
+        elif mdoe=="s":
+            lines[lin] = [c,""]
+        else:
+            lines[lin] = [c,p]
+    return lines
 
 def readParse(filename):
     #returns a commandScript object
+    raw = readFileRaw(filename)
+    lines = parseFile(raw)
     ou = commandScript()
-    
+    for x in lines:
+        ou.addCommand(x[0],x[1])
+    return ou
