@@ -157,26 +157,23 @@ def parseFile(bdata):
             no_empty_lines.append(x)
     lines = no_empty_lines
     del(no_empty_lines)
-    for lin in range(len(lines)):
-        x = (lines[lin]).decode("utf-8")
+    for i in range(len(lines)):
         c = ""
         p = ""
-        mode = "c"
-        for i in range(len(x)):
-            if mode==c:
-                if x==" ":
-                    c = x[:i]
-                    mode = "s"
-            elif mode=="s":
-                if x!=" ":
-                    p = x[i:]
-                    mode = "d"
-        if mode=="c":
-            lines[lin] = [c,""]
-        elif mdoe=="s":
-            lines[lin] = [c,""]
-        else:
-            lines[lin] = [c,p]
+        sp = lines[i].decode("utf8")
+        sp = sp.split(" ")
+        c = sp[0]
+        firstNonempty = -1
+        for j in range(1,len(sp)):
+            if len(sp[j])!=0:
+                firstNonempty = j
+                break
+        if firstNonempty!=-1:
+            for j in range(firstNonempty,len(sp)):
+                if j!=firstNonempty:
+                    p = p+" "
+                p = p+sp[j]
+        lines[i] = [c,p]
     return lines
 
 def readParse(filename):
