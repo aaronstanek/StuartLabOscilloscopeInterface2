@@ -34,7 +34,7 @@ class rawDataset:
         hold = []
         for x in self.rawData:
             #for each rawEvent
-            if x.selfTest:
+            if x.selfTest():
                 hold.append(x)
         ou = rawDataset()
         for i in range(1,len(hold)):
