@@ -9,11 +9,14 @@ def dumpStringToFile(filename,data):
 
 def isData(ds):
     if len(ds.data)==0:
+        print("Buffer is empty, no data saved.")
         return False
     return True
 
 def save_basic(ds,passData):
     #saves individual files with minimal data
+    if isData(ds)==False:
+        return
     for x in ds.data:
         #for each event
         try:
@@ -26,6 +29,8 @@ def save_basic(ds,passData):
 
 def save_meta(ds,passData):
     #saves "OSC_META", "EV_META", and "DATA" with each event
+    if isData(ds)==False:
+        return
     for x in ds.data:
         #for each event
         try:
@@ -41,6 +46,8 @@ def save_meta(ds,passData):
             print("Error while writing to file. Event skipped.")
 
 def save_clump(ds,passData):
+    if isData(ds)==False:
+        return
     try:
         pData = dict()
         pData["OSC_META"] = ds.meta
