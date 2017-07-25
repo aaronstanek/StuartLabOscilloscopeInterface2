@@ -19,6 +19,12 @@ def addReturn(data):
     data.append(13)
     data.append(10)
 
+def isData(ds):
+    if len(ds.data)==0:
+        print("Buffer is empty, no data saved.")
+        return False
+    return True
+
 def save_basic(ds,passData):
     #saves 4 column data with no header
     #first determine which channels to save
