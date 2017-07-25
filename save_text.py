@@ -29,6 +29,8 @@ def save_basic(ds,passData):
     #saves 4 column data with no header
     #first determine which channels to save
     #don't use passData["channels"] as this might be out of order
+    if isData(ds)==False:
+        return
     chan = []
     for i in range(1,5): #1,2,3,4
         if i in ds.data[0].data:
@@ -52,6 +54,8 @@ def save_basic(ds,passData):
             print("Error while writing to file. Event skipped.")
 
 def save_stuart1(ds,passData):
+    if isData(ds)==False:
+        return
     chan = []
     for i in range(1,5): #1,2,3,4
         if i in ds.data[0].data:
@@ -118,6 +122,8 @@ def save_stuart1(ds,passData):
             print("Error while writing to file. Event skipped.")
 
 def save_stuart2(ds,passData):
+    if isData(ds)==False:
+        return
     chan = []
     for i in range(1,5): #1,2,3,4
         if i in ds.data[0].data:
