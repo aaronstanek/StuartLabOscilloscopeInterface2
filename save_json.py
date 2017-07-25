@@ -7,6 +7,11 @@ def dumpStringToFile(filename,data):
     outfile.write(data)
     outfile.close()
 
+def isData(ds):
+    if len(ds.data)==0:
+        return False
+    return True
+
 def save_basic(ds,passData):
     #saves individual files with minimal data
     for x in ds.data:
