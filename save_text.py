@@ -259,7 +259,7 @@ def save_stuart3(ds,passData):
                     addSpace(ouData)
                     vol = float(x.data[chan[i]][line])
                     vol = vol / float((10)**(-9)) #converts to nanovolts
-                    merge(ouData,str(vol))
+                    merge(ouData,str(int(vol)))
                 addReturn(ouData)
             dumpBinToFile(passData["path"]+"event_"+str(passData["eventCount"])+".ord.txt",ouData)
             passData["eventCount"] = passData["eventCount"]+1
