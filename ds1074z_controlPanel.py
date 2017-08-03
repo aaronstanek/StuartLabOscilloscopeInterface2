@@ -6,6 +6,7 @@ import decodeEvents
 
 import save_json
 import save_text
+import save_ords
 
 class ds1074z_controlPanel:
     def __init__(self):
@@ -30,6 +31,10 @@ class ds1074z_controlPanel:
             save_text.save_stuart1(ds,passData)
         elif passData["fmt"]=="text_stuart2":
             save_text.save_stuart2(ds,passData)
+        elif passData["fmt"]=="text_stuart3":
+            save_text.save_stuart3(ds,passData)
+        elif passData["fmt"]=="ords":
+            save_ords.save_ords(ds,passData)
         else:
             raise Exception("The save format ("+str(passData["fmt"])+") is not recognized.")
     def singleCollection(self,passData):
