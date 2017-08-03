@@ -193,3 +193,76 @@ def save_stuart2(ds,passData):
             passData["fileCount"] = passData["fileCount"]+1
         except:
             raise Exception("Error while writing to file. Clump skipped.")
+
+def save_stuart3(ds,passData):
+    #exactly the same as stuart1, except this saves time on each line (10s of picoseconds)
+    #and voltage is now stored as nanovolts
+    if isData(ds)==False:
+        return
+    chan = []
+    for i in range(1,5): #1,2,3,4
+        if i in ds.data[0].data:
+            chan.append(i)
+    #chan now holds the list of channels in order (only those that are present)
+    dataLen = len(ds.data[0].data[chan[0]]) #ugly line
+    for x in ds.data:
+        #for each event
+        try:
+            ouData = []
+            #header
+            merge(ouData,"RIGOL1074Z")
+            addSpace(ouData)
+            merge(ouData,str(x.meta["TIME"]))
+            addSpace(ouData)
+            merge(ouData,str(dataLen))
+            addSpace(ouData)
+            merge(ouData,str(len(chan)))
+            addSpace(ouData)
+            merge(ouData,str(ds.meta["DISPLAY_TIMEDIVISION"]))
+            addSpace(ouData)
+            merge(ouData,str(ds.meta["DISPLAY_VOLTAGEDIVISION"]))
+            addReturn(ouData)
+            merge(ouData,str(ds.meta["TRIGGER_MODE"]))
+            addSpace(ouData)
+            merge(ouData,str(ds.meta["TRIGGER_POINT"]))
+            addReturn(ouData)
+            if ds.meta["TRIGGER_MODE"]=="EDGE":
+                merge(ouData,str(ds.meta["TRIGGER_CHANNEL"]))
+                addSpace(ouData)
+                merge(ouData,str(ds.meta["TRIGGER_SLOPE"]))
+                addSpace(ouData)
+                merge(ouData,str(ds.meta["TRIGGER_LEVEL"]))
+                addReturn(ouData)
+            elif ds.meta["TRIGGER_MODE"]=="DEL":
+                merge(ouData,str(ds.meta["TRIGGER_SOURCEA"]))
+                addSpace(ouData)
+                merge(ouData,str(ds.meta["TRIGGER_SLOPEA"]))
+                addSpace(ouData)
+                merge(ouData,str(ds.meta["TRIGGER_SOURCEB"]))
+                addSpace(ouData)
+                merge(ouData,str(ds.meta["TRIGGER_SLOPEB"]))
+                addSpace(ouData)
+                merge(ouData,str(ds.meta["TRIGGER_DELAYTYPE"]))
+                addSpace(ouData)
+                merge(ouData,str(ds.meta["TRIGGER_MAXDELAY"]))
+                addSpace(ouData)
+                merge(ouData,str(ds.meta["TRIGGER_MINDELAY"]))
+                addReturn(ouData)
+            else:
+                merge(ouData,"-----")
+                addReturn(ouData)
+            #data
+            baseTime = float(ds.meta["DISPLAY_TIMEDIVISION"]) / float((10)**(-11)) #converts to 10s of picoseconds
+            for line in range(dataLen):
+                merge(ouData,str(int(baseTime*line)))
+                for i in range(len(chan)):
+                    addSpace(ouData)
+                    vol = float(x.data[chan[i]][line])
+                    vol = vol / float((10)**(-9)) #converts to nanovolts
+                    merge(ouData,str(vol))
+                addReturn(ouData)
+            dumpBinToFile(passData["path"]+"event_"+str(passData["eventCount"])+".ord.txt",ouData)
+            passData["eventCount"] = passData["eventCount"]+1
+            passData["fileCount"] = passData["fileCount"]+1
+        except:
+            print("Error while writing to file. Event skipped.")
