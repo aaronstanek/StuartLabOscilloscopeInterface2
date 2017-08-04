@@ -1,4 +1,9 @@
-def dumpBinToFile(filename,data): #data is a list of ASCII values
+import os
+
+def dumpBinToFile(filename,data,passData): #data is a list of ASCII values
+    if os.path.isfile(filename):
+        if passData["overwrite_ok"]!=True:
+            Exception("Failed to overwrite file: "+str(filename)+" File overwriting not enabled.")
     bdata = bytes(data)
     outfile = open(filename,"wb")
     outfile.truncate(0)
@@ -87,7 +92,7 @@ def save_ords(ds,passData):
             ou = []
             addHead(ou,ds)
             addData(ou,ds)
-            dumpBinToFile(passData["path"]+"event_"+str(passData["eventCount"])+".ords",ouData)
+            dumpBinToFile(passData["path"]+"event_"+str(passData["eventCount"])+".ords",ouData,passData)
             passData["eventCount"] = passData["eventCount"]+1
             passData["fileCount"] = passData["fileCount"]+1
         except:

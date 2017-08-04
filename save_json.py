@@ -1,6 +1,10 @@
 import json
+import os
 
-def dumpStringToFile(filename,data):
+def dumpStringToFile(filename,data,passData):
+    if os.path.isfile(filename):
+        if passData["overwrite_ok"]!=True:
+            Exception("Failed to overwrite file: "+str(filename)+" File overwriting not enabled.")
     outfile = open(filename,"w")
     outfile.truncate(0)
     outfile.seek(0,0)
@@ -21,7 +25,7 @@ def save_basic(ds,passData):
         #for each event
         try:
             jData = json.dumps(x.data)
-            dumpStringToFile(passData["path"]+"event_"+str(passData["eventCount"])+".ord.json",jData)
+            dumpStringToFile(passData["path"]+"event_"+str(passData["eventCount"])+".ord.json",jData,passData)
             passData["eventCount"] = passData["eventCount"]+1
             passData["fileCount"] = passData["fileCount"]+1
         except:
@@ -39,7 +43,7 @@ def save_meta(ds,passData):
             pData["EV_META"] = x.meta
             pData["DATA"] = x.data
             jData = json.dumps(pData)
-            dumpStringToFile(passData["path"]+"event_"+str(passData["eventCount"])+".ord.json",jData)
+            dumpStringToFile(passData["path"]+"event_"+str(passData["eventCount"])+".ord.json",jData,passData)
             passData["eventCount"] = passData["eventCount"]+1
             passData["fileCount"] = passData["fileCount"]+1
         except:
@@ -60,7 +64,7 @@ def save_clump(ds,passData):
             da.append(m)
         pData["EVENTS"] = da
         jData = json.dumps(pData)
-        dumpStringToFile(passData["path"]+"clump_"+str(passData["fileCount"])+".ord.json",jData)
+        dumpStringToFile(passData["path"]+"clump_"+str(passData["fileCount"])+".ord.json",jData,passData)
         passData["eventCount"] = passData["eventCount"]+len(da)
         passData["fileCount"] = passData["fileCount"]+1
     except:
