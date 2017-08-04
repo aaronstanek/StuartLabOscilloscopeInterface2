@@ -12,6 +12,7 @@ import save_ords
 class ds1074z_controlPanel:
     def __init__(self):
         self.osc = ds1074z_oscilloscope.ds1074z_oscilloscope()
+        self.overwrite_ok = False
     def launch(self):
         print("Finding oscilloscope.")
         self.osc.find_device()
@@ -58,6 +59,7 @@ class ds1074z_controlPanel:
         print("Setting up.")
         self.osc.readSetup()
         passData = dict()
+        passData["overwrite_ok"] = self.overwrite_ok
         passData["channels"] = channels
         passData["count"] = count
         passData["delay"] = delay
