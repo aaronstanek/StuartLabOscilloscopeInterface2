@@ -1,3 +1,4 @@
+import only3
 import ds1074z_controlPanel
 import script_control_backend
 

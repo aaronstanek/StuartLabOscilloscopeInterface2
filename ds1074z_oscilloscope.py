@@ -1,3 +1,4 @@
+import only3
 import visa
 import time
 

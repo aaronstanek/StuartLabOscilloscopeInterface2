@@ -1,3 +1,4 @@
+import only3
 import ds1074z_oscilloscope #also brings rawEvent and event
 
 from rawEvent import *
