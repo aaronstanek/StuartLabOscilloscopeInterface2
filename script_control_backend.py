@@ -45,5 +45,12 @@ def execute(cp,com,vb,extra):
         osc.setDelayTrigger(extra)
     elif b=="collect-data":
         cp.collector(extra["channels"],extra["count"],extra["delay"],extra["path"],extra["fmt"])
+    elif b=="overwrite":
+        if p=="enable":
+            cp.overwrite_ok = True
+        elif p=="disable":
+            cp.overwrite_ok = False
+        else:
+            raise Exception("The overwrite command must be followed by enable or disable. Not "+str(p))
     else:
         raise Exception("Command not recognized. Error was caught in runtime and not by language checker.")
