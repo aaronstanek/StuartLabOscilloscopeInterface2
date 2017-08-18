@@ -15,6 +15,8 @@ def execute(cp,com,vb,extra):
     p = com.param
     if b=="set":
         setVariable(p,vb)
+    elif b=="rmvar":
+        vb.removeValue(p)
     elif b=="send":
         osc.sendCommand(p)
     elif b=="find":
