@@ -57,7 +57,7 @@ class ds1074z_controlPanel:
             clean.meta[x] = meta[x]
         print("Saving events.")
         self.saveDataset(clean,passData)
-    def collector(self,channels,count,delay,path,fmt):
+    def collector(self,channels,count,delay,path,fmt,**options):
         self.launch()
         print("Setting up.")
         self.osc.readSetup()
@@ -70,6 +70,7 @@ class ds1074z_controlPanel:
         passData["fmt"] = fmt
         passData["eventCount"] = 0
         passData["fileCount"] = 0
+        passData["options"] = options
         print("Starting data collection.")
         while passData["eventCount"]<passData["count"]:
             self.singleCollection(passData)
