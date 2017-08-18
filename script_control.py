@@ -126,13 +126,13 @@ class commandScript:
                         extra["vpp"] = dict()
                         print("using vpp-check")
                         if self.vb.exists("vpp-chan1"):
-                            extra["vpp"]["CHAN1"] = self.vb.getValue("vpp-chan1")
+                            extra["vpp"]["CHAN1"] = float(self.vb.getValue("vpp-chan1"))
                         if self.vb.exists("vpp-chan2"):
-                            extra["vpp"]["CHAN2"] = self.vb.getValue("vpp-chan2")
+                            extra["vpp"]["CHAN2"] = float(self.vb.getValue("vpp-chan2"))
                         if self.vb.exists("vpp-chan3"):
-                            extra["vpp"]["CHAN3"] = self.vb.getValue("vpp-chan3")
+                            extra["vpp"]["CHAN3"] = float(self.vb.getValue("vpp-chan3"))
                         if self.vb.exists("vpp-chan4"):
-                            extra["vpp"]["CHAN4"] = self.vb.getValue("vpp-chan4")
+                            extra["vpp"]["CHAN4"] = float(self.vb.getValue("vpp-chan4"))
                 script_control_backend.execute(self.cp,c,self.vb,extra)
             else:
                 script_control_backend.execute(self.cp,c,self.vb,dict())
