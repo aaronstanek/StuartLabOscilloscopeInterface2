@@ -42,7 +42,7 @@ class ds1074z_controlPanel:
     def singleCollection(self,passData):
         print("Getting events.")
         if "options" in passData:
-            raw = self.osc.getRawDataset(passData["channels"],100,passData["delay"],options)
+            raw = self.osc.getRawDataset(passData["channels"],100,passData["delay"],passData["options"])
         else:
             raw = self.osc.getRawDataset(passData["channels"],100,passData["delay"],dict())
         print("Filtering events.")
