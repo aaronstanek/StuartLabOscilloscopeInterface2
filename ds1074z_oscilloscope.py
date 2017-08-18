@@ -112,12 +112,15 @@ class ds1074z_oscilloscope:
             ou.data[chan] = self.query(":WAV:DATA?")
         self.single()
         return ou
-    def getRawDataset(self,channels,count,delay):
+    def getRawDataset(self,channels,count,delay,**options):
         ou = rawDataset()
         gather = count+1
         while len(ou.rawData)<gather:
             try:
-                ou.addEvent(self.getRawEvent(channels))
+                if "vpp" not in options:
+                    ou.addEvent(self.getRawEvent(channels))
+                else:
+                    ou.addEvent_with_vpp(self.getRawEvent(channels),options["vpp"])
                 time.sleep(delay)
             except:
                 print("Something went wrong, now reconnecting to oscilloscope.")
