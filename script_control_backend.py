@@ -44,7 +44,10 @@ def execute(cp,com,vb,extra):
     elif b=="trigger-delay":
         osc.setDelayTrigger(extra)
     elif b=="collect-data":
-        cp.collector(extra["channels"],extra["count"],extra["delay"],extra["path"],extra["fmt"])
+        collector_options = dict()
+        if "vpp" in extra:
+            collector_options["vpp"] = extra["vpp"]
+        cp.collector(extra["channels"],extra["count"],extra["delay"],extra["path"],extra["fmt"],**collector_options)
     elif b=="overwrite":
         if p=="enable":
             cp.overwrite_ok = True
