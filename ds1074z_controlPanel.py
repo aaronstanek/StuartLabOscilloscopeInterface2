@@ -41,7 +41,10 @@ class ds1074z_controlPanel:
             raise Exception("The save format ("+str(passData["fmt"])+") is not recognized.")
     def singleCollection(self,passData):
         print("Getting events.")
-        raw = self.osc.getRawDataset(passData["channels"],100,passData["delay"])
+        if "options" in passData:
+            raw = self.osc.getRawDataset(passData["channels"],100,passData["delay"],options)
+        else:
+            raw = self.osc.getRawDataset(passData["channels"],100,passData["delay"],dict())
         print("Filtering events.")
         filtered = raw.removeBadEvents()
         del(raw)

@@ -112,7 +112,7 @@ class ds1074z_oscilloscope:
             ou.data[chan] = self.query(":WAV:DATA?")
         self.single()
         return ou
-    def getRawDataset(self,channels,count,delay,**options):
+    def getRawDataset(self,channels,count,delay,options):
         ou = rawDataset()
         gather = count+1
         while len(ou.rawData)<gather:
