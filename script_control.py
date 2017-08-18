@@ -121,6 +121,18 @@ class commandScript:
                 extra["delay"] = float(self.vb.getValue("co-delay"))
                 extra["path"] = self.vb.getValue("co-path")
                 extra["fmt"] = self.vb.getValue("co-format")
+                if self.vb.exists("vpp-check"):
+                    if self.vb.getValue("vpp-check")=="on":
+                        extra["vpp"] = dict()
+                        print("using vpp-check")
+                        if self.vb.exists("vpp-chan1"):
+                            extra["vpp"]["CHAN1"] = self.vb.getValue("vpp-chan1")
+                        if self.vb.exists("vpp-chan2"):
+                            extra["vpp"]["CHAN2"] = self.vb.getValue("vpp-chan2")
+                        if self.vb.exists("vpp-chan3"):
+                            extra["vpp"]["CHAN3"] = self.vb.getValue("vpp-chan3")
+                        if self.vb.exists("vpp-chan4"):
+                            extra["vpp"]["CHAN4"] = self.vb.getValue("vpp-chan4")
                 script_control_backend.execute(self.cp,c,self.vb,extra)
             else:
                 script_control_backend.execute(self.cp,c,self.vb,dict())
