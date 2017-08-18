@@ -95,6 +95,7 @@ class ds1074z_oscilloscope:
         self.single()
         return ou
     def getRawEvent_with_vpp(self,channels,vpp):
+        start_time = time.time()
         while True:
             self.stop()
             m = True
@@ -111,6 +112,7 @@ class ds1074z_oscilloscope:
             self.sendCommand(":WAV:SOUR CHAN"+str(chan))
             ou.data[chan] = self.query(":WAV:DATA?")
         self.single()
+        print("I found one! This took "+str(time.time()-start_time)+" seconds.")
         return ou
     def getRawDataset(self,channels,count,delay,options):
         ou = rawDataset()
