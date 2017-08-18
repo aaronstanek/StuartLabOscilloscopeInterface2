@@ -120,7 +120,7 @@ class ds1074z_oscilloscope:
                 if "vpp" not in options:
                     ou.addEvent(self.getRawEvent(channels))
                 else:
-                    ou.addEvent_with_vpp(self.getRawEvent(channels),options["vpp"])
+                    ou.addEvent(self.getRawEvent_with_vpp(channels,options["vpp"]))
                 time.sleep(delay)
             except:
                 print("Something went wrong, now reconnecting to oscilloscope.")
