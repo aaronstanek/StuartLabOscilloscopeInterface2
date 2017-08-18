@@ -99,7 +99,7 @@ class ds1074z_oscilloscope:
             self.stop()
             m = True
             for chan in vpp:
-                if measure_vpp(chan)<vpp[chan]:
+                if self.measure_vpp(chan)<vpp[chan]:
                     m = False
                     break
             if m:
