@@ -94,6 +94,24 @@ class ds1074z_oscilloscope:
             ou.data[chan] = self.query(":WAV:DATA?")
         self.single()
         return ou
+    def getRawEvent_with_vpp(self,channels,vpp):
+        while True:
+            self.stop()
+            m = True
+            for chan in vpp:
+                if measure_vpp(chan)<vpp[chan]:
+                    m = False
+                    break
+            if m:
+                break
+            self.single()
+        ou = rawEvent()
+        ou.meta["TIME"] = time.strftime("%Y %m %d %H %M %S") #year month day hour minute second
+        for chan in channels:
+            self.sendCommand(":WAV:SOUR CHAN"+str(chan))
+            ou.data[chan] = self.query(":WAV:DATA?")
+        self.single()
+        return ou
     def getRawDataset(self,channels,count,delay):
         ou = rawDataset()
         gather = count+1
@@ -158,4 +176,4 @@ class ds1074z_oscilloscope:
         if "TRIGGER_MINDELAY" in values:
             self.sendCommand(":TRIG:DEL:TLOW "+str(values["TRIGGER_MINDELAY"]))
     def measure_vpp(self,chan):
-        return self.query_decode(":MEAS:ITEM? VPP "+chan)
+        return float(self.query_decode(":MEAS:ITEM? VPP "+chan))
