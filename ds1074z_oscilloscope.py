@@ -158,3 +158,5 @@ class ds1074z_oscilloscope:
             self.sendCommand(":TRIG:DEL:TUPP "+str(values["TRIGGER_MAXDELAY"]))
         if "TRIGGER_MINDELAY" in values:
             self.sendCommand(":TRIG:DEL:TLOW "+str(values["TRIGGER_MINDELAY"]))
+    def measure_vpp(self,chan):
+        return self.query_decode(":MEAS:ITEM? VPP "+chan)
